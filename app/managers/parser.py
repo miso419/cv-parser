@@ -1,5 +1,6 @@
+from app.managers.nlp import extract_entities
 
 
 def parse(data):
-    # TODO: Run NLP
-    return {'name': data['decomposedText']}
+    result = extract_entities(data['decomposedText'])
+    return result

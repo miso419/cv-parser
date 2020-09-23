@@ -28,7 +28,7 @@ venv: requirements.txt
 	test -d $(VENV_NAME) || virtualenv $(VENV_NAME)
 	. $(VENV_NAME)/bin/activate; pip3 install -Ur requirements.txt
 	touch $(VENV_NAME)/bin/activate
-	${PYTHON} -m spacy download en
+	${PYTHON} -m spacy download en_core_web_lg
 
 test: venv
 	${PYTHON} -m pytest -s
