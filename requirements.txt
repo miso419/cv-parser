@@ -1,0 +1,9 @@
+pylint
+pytest
+pre-commit
+
+Flask==1.1.2
+Flask-Injector==0.12.3
+requests==2.7.0
+spacy==2.3.2
+fuzzywuzzy==0.18.0

@@ -1,0 +1,4 @@
+-   repo: https://github.com/tiqk/ai-service.git
+    rev: ''  # Use the sha / tag you want to point at
+    hooks:
+    -   id: make lint
