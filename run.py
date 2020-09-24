@@ -3,7 +3,7 @@
 from flask import request
 from app import create_app
 from app.common.response_helper import response
-from app.managers.parser import parse
+from app.managers.parser import parse, get_spacy_json
 
 app = create_app()
 
@@ -16,6 +16,11 @@ def index():
 @app.route('/', methods=['POST'])
 def parse_cv():
     return response(parse, request.get_json())
+
+
+@app.route('/raw', methods=['POST'])
+def get_raw_data():
+    return response(get_spacy_json, request.get_json())
 
 
 if __name__ == '__main__':

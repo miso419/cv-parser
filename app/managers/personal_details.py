@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import re
-from app.managers.nlp_common import extract_named_entities
+from app.managers.nlp_common import extract_named_entities, extract_matched_spans
 
 
 def get_name(nlp_doc):
@@ -14,3 +14,8 @@ def get_email(source_text):
     pattern = re.compile(EMAIL_REGEX, re.IGNORECASE)
     emails = re.findall(pattern, source_text)
     return emails[0] if len(emails) > 0 else None
+
+
+def get_phone(nlp_doc, matches):
+    phones = extract_matched_spans(nlp_doc, matches, 'PhoneNumber')
+    return phones[0] if len(phones) > 0 else None
