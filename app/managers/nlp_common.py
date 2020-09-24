@@ -21,6 +21,13 @@ phone_pattern = [
 ]
 matcher.add('PhoneNumber', None, phone_pattern)
 
+education_pattern1 = [
+    {"SHAPE": "\n\n\n\n"},
+    {"LOWER": 'education'}
+]
+
+matcher.add('Education1', None, education_pattern1)
+
 
 def get_doc(source_text):
     return nlp(source_text)
@@ -31,15 +38,18 @@ def get_matches(doc):
 
 
 def extract_named_entities(doc, entity_type=None):
-    raw_list = [entity.text.strip()
-                for entity in doc.ents if entity_type is None or entity.label_ == entity_type]
-    return list(set(raw_list))  # Get unique names
+    return [
+        entity.text for entity in doc.ents if entity.label_ == entity_type]
 
 
 def extract_matched_spans(doc, matches, match_key):
-    raw_list = [re.sub(r'\s+', ' ', doc[start:end].text.strip())
-                for match_id, start, end in matches if nlp.vocab.strings[match_id] == match_key]
-    return list(set(raw_list))  # Get unique names
+    return [re.sub(r'\s+', ' ', doc[start:end].text.strip())
+            for match_id, start, end in matches if nlp.vocab.strings[match_id] == match_key]
+
+
+def extract_matched(matches, match_key):
+    return [{"id": match_id, "start": start, "end": end}
+            for match_id, start, end in matches if nlp.vocab.strings[match_id] == match_key]
 
 
 def get_nlp_doc_json(doc):
