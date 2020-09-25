@@ -16,6 +16,8 @@ def get_email(source_text):
     return emails[0] if len(emails) > 0 else None
 
 
-def get_phone(nlp_doc, matches):
-    phones = extract_matched_spans(nlp_doc, matches, 'PhoneNumber')
+def get_phone(source_text):
+    EN_PHONE_REGEX = r"((?:(?:\+?61 ?)?(?:(?:\(?0?[2|3|7|8]\)?) ?[0-9]{3,4} ?[0-9]{3,4}|0?4 ?[0-9]{2} ?[0-9]{3} ?[0-9]{3})|1(?:3|8)00 ?[0-9]{3} ?[0-9]{3}|133 ?[0-9]{3}))"
+    pattern = re.compile(EN_PHONE_REGEX, re.IGNORECASE)
+    phones = re.findall(pattern, source_text)
     return phones[0] if len(phones) > 0 else None

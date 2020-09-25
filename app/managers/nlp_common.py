@@ -23,10 +23,15 @@ matcher.add('PhoneNumber', None, phone_pattern)
 
 education_pattern1 = [
     {"SHAPE": "\n\n\n\n"},
-    {"LOWER": 'education'}
+    {"LOWER": {"REGEX": "education|educations|qualifications"}}
 ]
-
 matcher.add('Education1', None, education_pattern1)
+
+experience_pattern1 = [
+    {"SHAPE": "\n\n\n\n"},
+    {"LOWER": {"REGEX": "career|careers|experiences"}}
+]
+matcher.add('Experience1', None, experience_pattern1)
 
 
 def get_doc(source_text):

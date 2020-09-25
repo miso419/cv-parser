@@ -35,11 +35,12 @@ def get_educations(nlp_doc, matches):
     edu_list = []
 
     for w in nlp_doc[startIndex:]:
+        # Section
         if w.shape_ == "\n\n\n\n":
             break
 
+        # Line break
         if w.shape_ == "\n\n":
-            print(line)
             new_edu = extract_edu(all_institutes, line)
             if new_edu:
                 edu_list.append(new_edu)
